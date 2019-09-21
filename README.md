@@ -1,6 +1,6 @@
 # viewCode TFL-NM ver.2
 
-Тестовый пока функционала:
+Тестовый показ функционала:
 
 Url: http://ismytest.tao309.ru/
 <br/>
