@@ -1,4 +1,4 @@
-# viewCode TFL-NM ver.2
+# viewCode TFL-NM ver.2 (alpha)
 
 Тестовый показ функционала:
 
