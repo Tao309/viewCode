@@ -6,4 +6,4 @@ Url: http://ismytest.tao309.ru/
 <br/>
 Login: admin
 <br/>
-Passowrd: 123456
+Password: 123456
