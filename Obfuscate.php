@@ -1,4 +1,7 @@
 <?php
+/*
+ * Проверка, защита доступа к файлам
+ */
 
 class Obfuscate {
     private static $cssPrefix = [
@@ -12,6 +15,7 @@ class Obfuscate {
 
 	public static function compress_code($content = null)
 	{
+		//Убираем лишние символы из кода
 		if(empty($content)) {return null;}
 		
 		//if(defined("HEADER")) {
@@ -34,7 +38,12 @@ class Obfuscate {
 		$content = preg_replace('/([^\w\'\"])\s+/', '\\1 ', $content);		
 		$content = preg_replace('/\s\s/', ' ', $content);
 
+		//@todo Заменям пробелы в начале и в конце внутри {}
+        //@todo .field {}(вот тут пробелы убрать).name {}
+		
+		//ob_start("compress_css");
 		return self::compress_code($content);
+		//ob_end_flush();
 	}
 	public static function compressJS($content = null) {
 		if(empty($content)) {return null;}
@@ -56,7 +65,9 @@ class Obfuscate {
 		//Заменяем двойные пробелы на один
 		$content = preg_replace('/\s\s/', ' ', $content);
 		
+		//ob_start("compress_css");
 		return self::compress_code($content);
+		//ob_end_flush();
 	}
 
 	protected static function joinFilesContent($files = [], $ext = null)
@@ -69,6 +80,7 @@ class Obfuscate {
         $content = '';
         foreach($files as $file)
         {
+            //@todo Обработка не существования файла
             $content .= tFile::file_get_contents(zROOT.$file.'.'.$ext);
         }
 
@@ -93,6 +105,7 @@ class Obfuscate {
         return $text;
     }
 
+    //Замена свойств в CSS на кроссбарузерные
     public static function replaceCSSproperties($content = null)
     {
         if(empty($content))
@@ -159,6 +172,7 @@ class Obfuscate {
         return $content;
     }
 
+    //Замена переменных в контенте
     public static function replaceConstants($content = null, $constants = [])
     {
         if(empty($content) || empty($constants))
